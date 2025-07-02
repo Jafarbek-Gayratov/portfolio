@@ -1,73 +1,117 @@
-/* Umumiy stil */
 .navbar {
-  background-color: #1a1a1a;
-  color: white;
+  background-color: #0d1117;
+  color: #ffffff;
   padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .container {
+  width: 90%;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  margin: auto;
 }
 
 .navbar-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #00ffcc;
+  color: #61dafb;
+  letter-spacing: 1px;
 }
 
 .navbar-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
-  margin: 0;
-  padding: 0;
+  gap: 2rem;
+  transition: all 0.3s ease;
 }
 
 .navbar-links li a {
   text-decoration: none;
   color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
   transition: color 0.3s ease;
 }
 
+.navbar-links li a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background: #61dafb;
+  transition: 0.4s ease;
+}
+
 .navbar-links li a:hover {
-  color: #00ffcc;
+  color: #61dafb;
+}
+
+.navbar-links li a:hover::after {
+  width: 100%;
 }
 
 .menu-toggle {
   display: none;
+  font-size: 2rem;
   background: none;
   border: none;
   color: white;
-  font-size: 1.5rem;
   cursor: pointer;
 }
 
-/* Mobil versiya (media query) */
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
   .navbar-links {
-    display: none;
-    flex-direction: column;
-    background-color: #222;
     position: absolute;
-    top: 60px;
+    top: 100%;
     left: 0;
+    background-color: #0d1117;
     width: 100%;
-    padding: 1rem 0;
+    flex-direction: column;
+    align-items: center;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
   }
 
   .navbar-links.active {
-    display: flex;
+    max-height: 300px;
+    padding: 1rem 0;
   }
 
-  .menu-toggle {
-    display: block;
+  .navbar-links li {
+    margin: 1rem 0;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .navbar-links.active li {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
